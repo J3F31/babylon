@@ -1,4 +1,5 @@
 <template>
+  <button></button>
   <canvas></canvas>
 </template>
 
@@ -10,7 +11,8 @@ export default defineComponent({
   name: 'BabylonMain',
   mounted() {
     const canvas = document.querySelector("canvas")!;
-    new MainScene(canvas);
+    const button = document.querySelector("button")!;
+    new MainScene(canvas, button);
   }
 });
 </script>
@@ -22,5 +24,21 @@ canvas {
   height: 100%;
   outline: none;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0); /* mobile webkit */
+}
+button {
+  position: absolute;
+  width: 100px;
+  height: 40px;
+  border: whitesmoke solid 2px;
+  background-color: #333;
+}
+button:hover {
+  background-color: whitesmoke;
+}
+button:active {
+  background-color: rgb(243, 149, 180)
+}
+button:disabled {
+  opacity: .5;
 }
 </style>
