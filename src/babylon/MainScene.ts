@@ -1,4 +1,4 @@
-import { ArcRotateCamera, Color4, Engine, KeyboardEventTypes, MeshBuilder, RawTexture, Scene, SolidParticle, SolidParticleSystem, StandardMaterial, Texture, Vector3, Vector4 } from "@babylonjs/core";
+import { ArcRotateCamera, Color4, Engine, KeyboardEventTypes, MeshBuilder, RawTexture, Scene, SolidParticle, SolidParticleSystem, StandardMaterial, Texture, Vector2, Vector3, Vector4 } from "@babylonjs/core";
 import "@babylonjs/core/Debug/debugLayer";
 import "@babylonjs/inspector";
 
@@ -9,13 +9,13 @@ export class MainScene {
   engine: Engine;
 
   center: Vector3 = new Vector3(0, 1, 0);
-  faces: Array<Vector3> = [
-    new Vector3(0, 0, 10),
-    new Vector3(Math.PI/2, 0, 10),
-    new Vector3(Math.PI/2, Math.PI/2, 10),
-    new Vector3(Math.PI/2, -Math.PI/2, 10),
-    new Vector3(Math.PI/2, -Math.PI, 10),
-    new Vector3(Math.PI, 0, 10)
+  faces: Array<Vector2> = [
+    new Vector2(0, 0),
+    new Vector2(Math.PI/2, 0),
+    new Vector2(Math.PI/2, Math.PI/2),
+    new Vector2(Math.PI/2, -Math.PI/2),
+    new Vector2(Math.PI/2, -Math.PI),
+    new Vector2(Math.PI, 0)
   ];
 
   constructor(private canvas: HTMLCanvasElement, private button: HTMLButtonElement){
@@ -80,12 +80,12 @@ export class MainScene {
     //light.intensity = .5;
 
     const SPS = new SolidParticleSystem("sps", scene);
-    SPS.addShape(mainSquare, 192);
+    SPS.addShape(mainSquare, 100);
     const spsMesh = SPS.buildMesh();
     spsMesh.material = cubeMat;
     mainSquare.dispose();
 
-    const posArray = this.CalculatePositionsArray(SPS.particles, 24);
+    const posArray = this.CalculatePositionsArray(SPS.particles, 10);
 
     SPS.initParticles = () => {
       SPS.particles.forEach((particle) => {
@@ -118,7 +118,6 @@ export class MainScene {
         }
       }, 10);
       if (particle === SPS.particles[SPS.nbParticles - 1]) enableRotation = false
-      console.log("rotating")
     }
   
     
@@ -127,7 +126,7 @@ export class MainScene {
     SPS.setParticles();
 
     scene.registerBeforeRender(function() {
-      SPS.setParticles(); 
+      SPS.setParticles();
     });
 
     //scene.onKeyboardObservable.add((kbInfo) => {
@@ -144,7 +143,7 @@ export class MainScene {
 
     button.addEventListener("click", function(){
       targetRotation.x == 0? targetRotation.x = Math.PI/2 : targetRotation.x = 0
-      targetRotation.z == 0? targetRotation.z = Math.PI/2 : targetRotation.z = 0
+      targetRotation.z == 0? targetRotation.z = -Math.PI/2 : targetRotation.z = 0
       enableRotation = true
       button.disabled = true
     })
