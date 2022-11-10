@@ -1,4 +1,4 @@
-import { ArcRotateCamera, Color4, Engine, KeyboardEventTypes, MeshBuilder, RawTexture, Scene, SolidParticle, SolidParticleSystem, StandardMaterial, Texture, Vector2, Vector3, Vector4 } from "@babylonjs/core";
+import { ArcRotateCamera, Color4, Engine, KeyboardEventTypes, MeshBuilder, RawTexture, Scene, SceneLoader, SolidParticle, SolidParticleSystem, StandardMaterial, Texture, Vector2, Vector3, Vector4 } from "@babylonjs/core";
 import "@babylonjs/core/Debug/debugLayer";
 import "@babylonjs/inspector";
 
@@ -22,6 +22,8 @@ export class MainScene {
     this.engine = new Engine(this.canvas, false);
     this.scene = this.CreateScene(this.button);
     this.camera = this.CreateCamera();
+
+    this.CreateCity();
     
 
     this.engine.runRenderLoop(() => {
@@ -191,5 +193,9 @@ export class MainScene {
   Delay(time: number): Promise<void> {
     const ms = time * 1000;
     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async CreateCity() {
+    const models = await SceneLoader.ImportMeshAsync("", "./models/", "city.glb");
   }
 }

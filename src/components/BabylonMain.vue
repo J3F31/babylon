@@ -1,18 +1,24 @@
 <template>
-  <button></button>
+  <!--<button></button>-->
+
+  <img src="/images/Persona.png" alt="Persona" class="persona">
+
+  <img src="/images/Data.png" alt="Data" class="data">
   <canvas></canvas>
 </template>
 
 <script lang="ts">
-import { MainScene } from '@/babylon/MainScene';
+//import { MainScene } from '@/babylon/MainScene';
+import { City } from '@/babylon/City';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'BabylonMain',
   mounted() {
     const canvas = document.querySelector("canvas")!;
-    const button = document.querySelector("button")!;
-    new MainScene(canvas, button);
+    //const button = document.querySelector("button")!;
+    //new MainScene(canvas, button);
+    new City(canvas);
   }
 });
 </script>
@@ -25,7 +31,23 @@ canvas {
   outline: none;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0); /* mobile webkit */
 }
-button {
+.data {
+  width: 55%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 68%;
+  top: 12%;
+}
+
+.persona {
+  width: 35%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 20%;
+  top: 18%;
+}
+
+/*button {
   position: absolute;
   width: 100px;
   height: 40px;
@@ -40,5 +62,5 @@ button:active {
 }
 button:disabled {
   opacity: .5;
-}
+}*/
 </style>
