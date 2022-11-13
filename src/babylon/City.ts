@@ -22,7 +22,6 @@ export class City {
       for(let i=0; i<4; i++) {
         cities[i] = city.clone("city" + [i], null);
         cities[i]!.position = new Vector3(x, 0, z);
-        console.log(x, z)
         i === 0 ? x = 25 : null;
         i === 1 ? z = 25 : null;
         i === 2 ? x = 0 : null;
@@ -30,7 +29,12 @@ export class City {
       city.dispose()
     });
 
-    this.PopUps();
+    document.addEventListener("keydown", (event) => {
+      if (event.code === "KeyW") {
+        this.PopUps();
+      }  
+    })
+    
 
     
     
@@ -71,7 +75,7 @@ export class City {
   }
   
   CreateCamera(): ArcRotateCamera {
-    const camera = new ArcRotateCamera("camera", -1, 1.3, 70, new Vector3(12.5, 0, 12.5), this.scene);
+    const camera = new ArcRotateCamera("camera", -0.8570, 1.3298, 32.4982, new Vector3(12.5, 0, 12.5), this.scene);
     camera.attachControl();
 
     //camera.upperBetaLimit = Math.PI/2 - .1;
@@ -126,7 +130,6 @@ export class City {
     for(let i=0; i<4; i++) {
       popups[i] = plane.clone("popup" + [i], null);
       popups[i]!.position = new Vector3(a, 0, b);
-      console.log(a, b)
       i === 0 ? a = 30 : null;
       i === 1 ? b = 30 : null;
       i === 2 ? a = 5 : null;
